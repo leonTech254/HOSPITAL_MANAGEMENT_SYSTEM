@@ -10,9 +10,9 @@ namespace HOSPITAL_MANAGEMENT.DatabaseConnection
 {
 	public class DBConn:DbContext
 	{
-		public DbSet<Doctor> doctor { get; set; }
-		public DbSet<Patient> patient { get; set; }
-		public DbSet<Room> room { get; set; }
+		public DbSet<Doctor> Doctor { get; set; }
+		public DbSet<Patient> Patient { get; set; }
+		public DbSet<Room> Room { get; set; }
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseSqlServer(@"Server=DESKTOP-2KRMLJS\MSSQLSERVER01;Database=HospitalManagementSystem;Trusted_Connection=True;TrustServerCertificate=True;");
