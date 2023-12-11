@@ -11,14 +11,68 @@ namespace HOSPITAL_MANAGEMENT.Services
 {
 	public class PatientServices
 	{
-		public String? AddNewPatient()
+		public void WelcomePatient()
 		{
+			Console.WriteLine("\n\nWELCOME TO PATIENT MODULE");
+			Dictionary<int, string> MenuDictionary = new Dictionary<int, string>
+		{
+			{1,"Add Patient" },
+			{ 2, "See all Patients" },
+			{ 3, "Update Patient" },
+			{ 4, "Delete patient" }
+		};
+			foreach(var item in MenuDictionary)
+			{
+				Console.WriteLine($"{item.Key}:{item.Value}");
+			}
+			Console.WriteLine("select Option");
+			String userRawChoice=Console.ReadLine();
+			try
+			{
+				int userChoice=int.Parse(userRawChoice);
+				if(userChoice==1)
+				{
+					AddNewPatient();
+				}else if(userChoice==2)
+				{
+					GetAllPatients();
+				}else if(userChoice==3)
+				{
+					UpdatePatientDetails();
+				}else if(userChoice==4)
+				{
+					DeletePatient();
+				}else
+				{
+					Console.WriteLine("You selected an Invalid choice");
+				}
+			}catch (Exception e)
+			{
+				Console.Write(e.ToString());
+			}
+
+		}
+
+		public string? AddNewPatient()
+		{
+			Console.WriteLine("Enter First Name:");
+			string firstName = Console.ReadLine();
+
+			Console.WriteLine("Enter Last Name:");
+			string lastName = Console.ReadLine();
+
+			Console.WriteLine("Enter Email:");
+			string email = Console.ReadLine();
+
+			Console.WriteLine("Enter Room ID:");
+			int roomId = int.Parse(Console.ReadLine());
+
 			var newPatient = new Patient
 			{
-				FirstName = "Martin",
-				LastName = "Muruthi",
-				Email = "martinmuruthi@teach2give.com",
-				RoomID = 1,
+				FirstName = firstName,
+				LastName = lastName,
+				Email = email,
+				RoomID = roomId,
 			};
 
 			using (var dbContext = new DBConn())
@@ -26,6 +80,7 @@ namespace HOSPITAL_MANAGEMENT.Services
 				dbContext.Patient.Add(newPatient);
 				dbContext.SaveChanges();
 			}
+
 			return "Patient has been Added Successfully";
 		}
 
@@ -34,7 +89,7 @@ namespace HOSPITAL_MANAGEMENT.Services
 			using (var dbContext = new DBConn())
 			{
 
-				string deleteSql = $"DELETE FROM Patients WHERE PatientID = {patientID}";
+				string deleteSql = $"DELETE FROM Patient WHERE PatientID = {patientID}";
 				dbContext.Database.ExecuteSqlRaw(deleteSql);
 
 			}
@@ -44,7 +99,7 @@ namespace HOSPITAL_MANAGEMENT.Services
 			using (var dbContext = new DBConn())
 			{
 
-				string query = "SELECT * FROM Patients";
+				string query = "SELECT * FROM Patient";
 				var allPatients = dbContext.Patient.FromSqlRaw(query).ToList();
 				foreach(var patient in allPatients)
 				{
@@ -58,7 +113,7 @@ namespace HOSPITAL_MANAGEMENT.Services
 		public void GetPatientById(int patientId)
 		{
 			DBConn dbContext = new DBConn();
-			string query = $"SELECT * FROM Patients WHERE PatientID={patientId}";
+			string query = $"SELECT * FROM Patient WHERE PatientID={patientId}";
 			Patient patient = dbContext.Patient.FromSqlRaw(query).FirstOrDefault();
 			if(patient!=null)
 			{
@@ -67,25 +122,34 @@ namespace HOSPITAL_MANAGEMENT.Services
 			
 		}
 
-		public void UPdatePatientDetails(int patientIdToUpdate,String firstname)
+		public void UpdatePatientDetails()
 		{
-			DBConn dbContext = new DBConn();
-			string updateSql = $"UPDATE Patients SET Username = '{firstname}' WHERE PatientID = {patientIdToUpdate}";
-			dbContext.Database.ExecuteSqlRaw(updateSql);
-			Console.WriteLine("Username updated successfully.");
-		}
+			Console.WriteLine("Enter Patient ID to Update:");
+			int patientId = int.Parse(Console.ReadLine());
 
-		public void DeletePatient(int patientId)
-		{
-			DBConn dBConn = new DBConn();
+			Console.WriteLine("Enter New First Name:");
+			string newFirstName = Console.ReadLine();
+
 			using (var dbContext = new DBConn())
 			{
-				string deleteSql = $"DELETE FROM Patients WHERE PatientID = {patientId}";
+				string updateSql = $"UPDATE Patient SET FirstName = '{newFirstName}' WHERE PatientID = {patientId}";
+				dbContext.Database.ExecuteSqlRaw(updateSql);
+				Console.WriteLine("Patient details updated successfully.");
+			}
+		}
+
+		public void DeletePatient()
+		{
+			Console.WriteLine("Enter Patient ID to Delete:");
+			int patientId = int.Parse(Console.ReadLine());
+
+			using (var dbContext = new DBConn())
+			{
+				string deleteSql = $"DELETE FROM Patient WHERE PatientID = {patientId}";
 				dbContext.Database.ExecuteSqlRaw(deleteSql);
 
 				Console.WriteLine("Patient deleted successfully.");
 			}
-
 		}
 
 

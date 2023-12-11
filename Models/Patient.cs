@@ -11,6 +11,7 @@ namespace HOSPITAL_MANAGEMENT.Models
 	public class Patient
 	{
 		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int PatientID { get; set; }
 
 		[Required]

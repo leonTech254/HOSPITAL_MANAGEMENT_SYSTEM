@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HOSPITAL_MANAGEMENT.Migrations
 {
     [DbContext(typeof(DBConn))]
-    [Migration("20231208072857_CreateDatabase")]
+    [Migration("20231211070056_CreateDatabase")]
     partial class CreateDatabase
     {
         /// <inheritdoc />
@@ -44,7 +44,7 @@ namespace HOSPITAL_MANAGEMENT.Migrations
 
                     b.HasKey("DoctorID");
 
-                    b.ToTable("doctor");
+                    b.ToTable("Doctor");
                 });
 
             modelBuilder.Entity("HOSPITAL_MANAGEMENT.Models.Patient", b =>
@@ -77,7 +77,7 @@ namespace HOSPITAL_MANAGEMENT.Migrations
 
                     b.HasIndex("RoomID");
 
-                    b.ToTable("patient");
+                    b.ToTable("Patient");
                 });
 
             modelBuilder.Entity("HOSPITAL_MANAGEMENT.Models.Room", b =>
@@ -98,7 +98,7 @@ namespace HOSPITAL_MANAGEMENT.Migrations
 
                     b.HasKey("RoomID");
 
-                    b.ToTable("room");
+                    b.ToTable("Room");
                 });
 
             modelBuilder.Entity("HOSPITAL_MANAGEMENT.Models.Patient", b =>

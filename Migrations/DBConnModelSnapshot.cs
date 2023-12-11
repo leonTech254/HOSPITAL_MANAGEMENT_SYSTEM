@@ -41,7 +41,7 @@ namespace HOSPITAL_MANAGEMENT.Migrations
 
                     b.HasKey("DoctorID");
 
-                    b.ToTable("doctor");
+                    b.ToTable("Doctor");
                 });
 
             modelBuilder.Entity("HOSPITAL_MANAGEMENT.Models.Patient", b =>
@@ -74,7 +74,7 @@ namespace HOSPITAL_MANAGEMENT.Migrations
 
                     b.HasIndex("RoomID");
 
-                    b.ToTable("patient");
+                    b.ToTable("Patient");
                 });
 
             modelBuilder.Entity("HOSPITAL_MANAGEMENT.Models.Room", b =>
@@ -95,7 +95,7 @@ namespace HOSPITAL_MANAGEMENT.Migrations
 
                     b.HasKey("RoomID");
 
-                    b.ToTable("room");
+                    b.ToTable("Room");
                 });
 
             modelBuilder.Entity("HOSPITAL_MANAGEMENT.Models.Patient", b =>

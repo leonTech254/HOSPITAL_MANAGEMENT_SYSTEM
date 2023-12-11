@@ -11,7 +11,7 @@ namespace HOSPITAL_MANAGEMENT.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "doctor",
+                name: "Doctor",
                 columns: table => new
                 {
                     DoctorID = table.Column<int>(type: "int", nullable: false)
@@ -21,11 +21,11 @@ namespace HOSPITAL_MANAGEMENT.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_doctor", x => x.DoctorID);
+                    table.PrimaryKey("PK_Doctor", x => x.DoctorID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "room",
+                name: "Room",
                 columns: table => new
                 {
                     RoomID = table.Column<int>(type: "int", nullable: false)
@@ -35,11 +35,11 @@ namespace HOSPITAL_MANAGEMENT.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_room", x => x.RoomID);
+                    table.PrimaryKey("PK_Room", x => x.RoomID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "patient",
+                name: "Patient",
                 columns: table => new
                 {
                     PatientID = table.Column<int>(type: "int", nullable: false)
@@ -51,18 +51,18 @@ namespace HOSPITAL_MANAGEMENT.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_patient", x => x.PatientID);
+                    table.PrimaryKey("PK_Patient", x => x.PatientID);
                     table.ForeignKey(
-                        name: "FK_patient_room_RoomID",
+                        name: "FK_Patient_Room_RoomID",
                         column: x => x.RoomID,
-                        principalTable: "room",
+                        principalTable: "Room",
                         principalColumn: "RoomID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_patient_RoomID",
-                table: "patient",
+                name: "IX_Patient_RoomID",
+                table: "Patient",
                 column: "RoomID");
         }
 
@@ -70,13 +70,13 @@ namespace HOSPITAL_MANAGEMENT.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "doctor");
+                name: "Doctor");
 
             migrationBuilder.DropTable(
-                name: "patient");
+                name: "Patient");
 
             migrationBuilder.DropTable(
-                name: "room");
+                name: "Room");
         }
     }
 }

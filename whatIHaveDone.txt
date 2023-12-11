@@ -1,0 +1,2 @@
+I have worked on the Patient Module only and completed all the CRUD operations, such as retrieving all patients, deleting a patient by ID, and updating their details. 
+All the methods are called in the Program.cs file
